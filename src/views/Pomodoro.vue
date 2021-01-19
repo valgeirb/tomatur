@@ -1,5 +1,4 @@
 <template>
-  <TopMenu />
   <div class="h-full flex flex-col">
     <div class="flex-1 flex flex-col justify-center items-center">
       <div class="flex flex-col items-center space-y-4">
@@ -8,10 +7,13 @@
         <div class="text-lg hidden">until a small break</div>
       </div>
     </div>
-    <BottomMenu />
+    <BottomMenu @start="start" @reset="reset" />
   </div>
 </template>
 
 <script setup>
-  import { TopMenu, BottomMenu } from "../components";
+  import { BottomMenu } from "../components";
+
+  const start = () => console.log("Starting timer");
+  const reset = () => console.log("Reset timer");
 </script>
