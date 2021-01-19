@@ -2,22 +2,37 @@
   <div
     class="grid grid-cols-3 justify-center justify-items-center items-center"
   >
-    <RouterLink to="/settings" class="text-2xl">
+    <RouterLink to="/settings" class="cursor-pointer text-2xl">
       <FontAwesomeIcon icon="sliders-h" />
     </RouterLink>
     <div
-      class="text-2xl bg-red-500 h-16 w-16 flex items-center justify-center text-white rounded-full"
+      @click="startOrReset"
+      class="cursor-pointer text-2xl bg-red-500 h-16 w-16 flex items-center justify-center text-white rounded-full"
     >
-      <FontAwesomeIcon class="ml-1" icon="play" />
+      <FontAwesomeIcon
+        :class="mainIcon === 'play' ? 'ml-1' : null"
+        :key="mainIcon"
+        :icon="mainIcon"
+      />
     </div>
-    <RouterLink to="/sessions" class="text-2xl">
+    <RouterLink to="/sessions" class="cursor-pointer text-2xl">
       <FontAwesomeIcon icon="list-ul" />
     </RouterLink>
   </div>
 </template>
 
-<script>
-  export default {
-    name: "BottomMenu",
+<script setup>
+  import { useContext, ref, computed } from "vue";
+  const { emit } = useContext();
+  const timerStarted = ref(false);
+  const mainIcon = computed(() => (timerStarted.value ? "undo-alt" : "play"));
+
+  const startOrReset = () => {
+    if (timerStarted.value) {
+      emit("reset");
+    } else {
+      emit("start");
+    }
+    timerStarted.value = !timerStarted.value;
   };
 </script>
