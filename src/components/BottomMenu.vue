@@ -6,8 +6,8 @@
       <FontAwesomeIcon icon="sliders-h" />
     </RouterLink>
     <div
-      @click="startOrReset"
-      class="cursor-pointer text-2xl bg-red-500 h-16 w-16 flex items-center justify-center text-white rounded-full"
+      @click="startOrStop"
+      class="cursor-pointer text-2xl bg-tomato h-16 w-16 flex items-center justify-center text-white rounded-full"
     >
       <FontAwesomeIcon
         :class="mainIcon === 'play' ? 'ml-1' : null"
@@ -25,11 +25,11 @@
   import { useContext, ref, computed } from "vue";
   const { emit } = useContext();
   const timerStarted = ref(false);
-  const mainIcon = computed(() => (timerStarted.value ? "undo-alt" : "play"));
+  const mainIcon = computed(() => (timerStarted.value ? "stop" : "play"));
 
-  const startOrReset = () => {
+  const startOrStop = () => {
     if (timerStarted.value) {
-      emit("reset");
+      emit("stop");
     } else {
       emit("start");
     }
