@@ -1,7 +1,7 @@
 <template>
   <Squigglies>
     <div
-      class="relative overflow-auto h-full bg-white rounded-2xl p-8 shadow-2xl"
+      class="select-none lg:select-auto relative overflow-auto h-full bg-white rounded-2xl p-4 shadow-2xl"
     >
       <slot />
     </div>
