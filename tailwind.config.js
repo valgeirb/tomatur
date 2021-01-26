@@ -5,9 +5,13 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ["Overpass", "sans-serif", ...defaultTheme.fontFamily.sans],
+      sans: ["Overpass Mono", "sans-serif", ...defaultTheme.fontFamily.sans],
     },
-    extend: {},
+    extend: {
+      colors: {
+        tomato: "#ff6347",
+      },
+    },
   },
   variants: {
     extend: {},
