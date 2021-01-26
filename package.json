@@ -1,5 +1,5 @@
 {
-  "name": "tomatur1",
+  "name": "tomatur",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "prettier": "^2.2.1",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "worker-timers": "^7.0.10"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.0.4",
@@ -19,7 +20,7 @@
     "autoprefixer": "^10.2.1",
     "postcss": "^8.2.4",
     "tailwindcss": "^2.0.2",
-    "vite": "^2.0.0-beta.12",
+    "vite": "^2.0.0-beta.49",
     "vite-plugin-pwa": "^0.3.8"
   }
 }
