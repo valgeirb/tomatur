@@ -7,7 +7,7 @@
       >
         <div>Session</div>
         <select
-          v-model="settings.session"
+          v-model="session"
           class="text-tomato bg-white"
           name="session"
           id="session"
@@ -30,7 +30,7 @@
       >
         <div>Small break</div>
         <select
-          v-model="settings.smallBreak"
+          v-model="smallBreak"
           class="text-tomato bg-white"
           name="session"
           id="session"
@@ -46,7 +46,7 @@
       >
         <div>Long break</div>
         <select
-          v-model="settings.longBreak"
+          v-model="longBreak"
           class="text-tomato bg-white"
           name="session"
           id="session"
@@ -61,28 +61,28 @@
         class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
       >
         <div>Notifications</div>
-        <Toggle v-model="settings.notifications" />
+        <Toggle v-model="notifications" />
       </div>
 
       <div
         class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
       >
         <div>Sound</div>
-        <Toggle v-model="settings.sound" />
+        <Toggle v-model="sound" />
       </div>
 
       <div
         class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
       >
         <div>Dark theme</div>
-        <Toggle v-model="settings.darkTheme" />
+        <Toggle v-model="darkTheme" />
       </div>
 
       <div
         class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
       >
-        <div>Show info button</div>
-        <Toggle v-model="settings.showInfoButton" />
+        <div>Info button</div>
+        <Toggle v-model="showInfoButton" />
       </div>
     </div>
   </div>
@@ -92,5 +92,13 @@
   import useSettings from "../useSettings";
   import { Toggle } from "../components";
 
-  const { settings } = useSettings();
+  const {
+    session,
+    smallBreak,
+    longBreak,
+    notifications,
+    sound,
+    darkTheme,
+    showInfoButton,
+  } = useSettings();
 </script>

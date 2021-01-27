@@ -20,8 +20,13 @@
 <script setup>
   import { computed } from "vue";
   import { useRoute } from "vue-router";
+  import useSettings from "../useSettings";
 
+  const { showInfoButton } = useSettings();
   const route = useRoute();
-  const showInfoIcon = computed(() => route.name === "Pomodoro");
-  const showBackIcon = computed(() => !showInfoIcon.value);
+
+  const showInfoIcon = computed(
+    () => route.name === "Pomodoro" && showInfoButton.value,
+  );
+  const showBackIcon = computed(() => route.name !== "Pomodoro");
 </script>
