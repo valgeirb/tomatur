@@ -30,7 +30,7 @@
       >
         <div>Small break</div>
         <select
-          v-model="smallBreak"
+          v-model="shortBreak"
           class="text-tomato bg-white"
           name="session"
           id="session"
@@ -89,12 +89,12 @@
 </template>
 
 <script setup>
-  import useSettings from "../useSettings";
+  import useSettings from "../composables/useSettings";
   import { Toggle } from "../components";
 
   const {
     session,
-    smallBreak,
+    shortBreak,
     longBreak,
     notifications,
     sound,

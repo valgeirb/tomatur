@@ -20,7 +20,7 @@
 <script setup>
   import { computed } from "vue";
   import { useRoute } from "vue-router";
-  import useSettings from "../useSettings";
+  import useSettings from "../composables/useSettings";
 
   const { showInfoButton } = useSettings();
   const route = useRoute();
