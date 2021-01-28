@@ -2,7 +2,7 @@ import { reactive, watch, toRefs } from "vue";
 
 let state = reactive({
   session: 25,
-  smallBreak: 5,
+  shortBreak: 5,
   longBreak: 15,
   notifications: false,
   sound: false,
