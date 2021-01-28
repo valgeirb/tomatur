@@ -2,7 +2,10 @@
   <div
     class="grid grid-cols-3 justify-center justify-items-center items-center"
   >
-    <RouterLink to="/settings" class="cursor-pointer text-2xl">
+    <RouterLink
+      to="/settings"
+      class="h-16 w-16 flex items-center justify-center cursor-pointer text-2xl"
+    >
       <FontAwesomeIcon icon="sliders-h" />
     </RouterLink>
     <div
@@ -15,7 +18,10 @@
         :icon="mainIcon"
       />
     </div>
-    <RouterLink to="/sessions" class="cursor-pointer text-2xl">
+    <RouterLink
+      to="/sessions"
+      class="h-16 w-16 flex items-center justify-center cursor-pointer text-2xl"
+    >
       <FontAwesomeIcon icon="list-ul" />
     </RouterLink>
   </div>
