@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle" :class="{ on: toggled }" @click="change"></div>
+  <div class="toggle" :class="{ on: toggled }" @click="toggle"></div>
 </template>
 
 <script setup>
@@ -11,7 +11,7 @@
   const { emit } = useContext();
   const toggled = ref(props.modelValue);
 
-  const change = () => {
+  const toggle = () => {
     toggled.value = !toggled.value;
     emit("update:modelValue", toggled.value);
   };
