@@ -1,10 +1,7 @@
 <template>
-  <div class="h-full flex flex-col space-y-4 pt-12 text-lg">
-    <div class="text-4xl font-bold uppercase text-center">Settings</div>
+  <div class="h-full flex flex-col space-y-4 text-lg pt-12">
     <div class="flex flex-col pt-4">
-      <div
-        class="flex justify-between py-6 border-dashed border-gray-500 border-t-2 border-b-2"
-      >
+      <div class="flex justify-between py-6">
         <div>Session</div>
         <select
           v-model="session"
@@ -25,9 +22,7 @@
         </select>
       </div>
 
-      <div
-        class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
-      >
+      <div class="flex justify-between py-6">
         <div>Small break</div>
         <select
           v-model="shortBreak"
@@ -41,9 +36,7 @@
         </select>
       </div>
 
-      <div
-        class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
-      >
+      <div class="flex justify-between py-6">
         <div>Long break</div>
         <select
           v-model="longBreak"
@@ -57,30 +50,22 @@
         </select>
       </div>
 
-      <div
-        class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
-      >
+      <div class="flex justify-between py-6">
         <div>Notifications</div>
         <Toggle v-model="notifications" />
       </div>
 
-      <div
-        class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
-      >
+      <div class="flex justify-between py-6">
         <div>Sound</div>
         <Toggle v-model="sound" />
       </div>
 
-      <div
-        class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
-      >
+      <div class="flex justify-between py-6">
         <div>Dark theme</div>
         <Toggle v-model="darkTheme" />
       </div>
 
-      <div
-        class="flex justify-between py-6 border-dashed border-gray-500 border-b-2"
-      >
+      <div class="flex justify-between py-6">
         <div>Info button</div>
         <Toggle v-model="showInfoButton" />
       </div>
