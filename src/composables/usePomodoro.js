@@ -1,4 +1,4 @@
-import { reactive, computed, toRefs } from "vue";
+import { reactive, computed, toRefs, watch } from "vue";
 import * as workerTimers from "worker-timers";
 import useSettings from "./useSettings";
 
@@ -13,6 +13,14 @@ const state = reactive({
   remainingTime: session.value * 60,
   minutes: session.value,
   seconds: 0,
+});
+
+watch([session, shortBreak, longBreak], ([session, shortBreak, longBreak]) => {
+  state.session = session;
+  state.shortBreak = shortBreak;
+  state.longBreak = longBreak;
+  state.remainingTime = session * 60;
+  state.minutes = session;
 });
 
 export default function usePomodoro() {
