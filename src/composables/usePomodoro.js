@@ -2,43 +2,42 @@ import { reactive, computed, toRefs, watch } from "vue";
 import * as workerTimers from "worker-timers";
 import useSettings from "./useSettings";
 
-const { session, shortBreak, longBreak } = useSettings();
+const { sessionMinutes, shortBreakMinutes, longBreakMinutes } = useSettings();
 
 const state = reactive({
-  mode: "pomodoro", // pomodoro, shortBreak, longBreak
+  currentMode: "pomodoro",
+  modes: {
+    pomodoro: sessionMinutes.value,
+    shortBreak: shortBreakMinutes.value,
+    longBreak: longBreakMinutes.value,
+  },
   pomodoros: 0,
-  session: session.value,
-  shortBreak: shortBreak.value,
-  longBreak: longBreak.value,
-  remainingTime: session.value * 60,
-  minutes: session.value,
-  seconds: 0,
+  remainingSeconds: sessionMinutes.value * 60,
 });
 
-watch([session, shortBreak, longBreak], ([session, shortBreak, longBreak]) => {
-  state.session = session;
-  state.shortBreak = shortBreak;
-  state.longBreak = longBreak;
-  state.remainingTime = session * 60;
-  state.minutes = session;
-});
+watch(
+  [sessionMinutes, shortBreakMinutes, longBreakMinutes],
+  ([sessionMinutes, shortBreakMinutes, longBreakMinutes]) => {
+    state.modes.pomodoro = sessionMinutes;
+    state.modes.shortBreak = shortBreakMinutes;
+    state.modes.longBreak = longBreakMinutes;
+    state.remainingSeconds = sessionMinutes * 60;
+  },
+);
 
 export default function usePomodoro() {
   let intervalId = null;
 
   const start = () => {
-    if (state.mode === "pomodoro") {
-      state.pomodoros++;
-    }
-
     intervalId = workerTimers.setInterval(() => {
-      state.remainingTime--;
-      if (state.remainingTime === 0) {
+      state.remainingSeconds--;
+      if (state.remainingSeconds === 0) {
         workerTimers.clearInterval(intervalId);
 
         // Continuously switches between pomodoro mode and break mode (short/long)
-        switch (state.mode) {
+        switch (state.currentMode) {
           case "pomodoro":
+            state.pomodoros++;
             if (state.pomodoros === 4) {
               state.pomodoros = 0;
               switchMode("longBreak");
@@ -56,26 +55,24 @@ export default function usePomodoro() {
 
   const stop = () => {
     workerTimers.clearInterval(intervalId);
-    state.minutes = session.value;
-    state.seconds = 0;
     state.pomodoros = 0;
     state.mode = "pomodoro";
-    state.remainingTime = session.value * 60;
+    state.remainingSeconds = sessionTime.value * 60;
   };
 
   const switchMode = (mode) => {
-    state.mode = mode;
-    state.remainingTime = state[mode] * 60;
+    state.currentMode = mode;
+    state.remainingSeconds = state.modes[mode] * 60;
   };
 
   const clock = computed(() => {
-    state.minutes = Math.floor(state.remainingTime / 60);
-    state.seconds = state.remainingTime % 60;
+    const minutes = Math.floor(state.remainingSeconds / 60);
+    const seconds = state.remainingSeconds % 60;
 
-    const minutes = state.minutes < 10 ? `0${state.minutes}` : state.minutes;
-    const seconds = state.seconds < 10 ? `0${state.seconds}` : state.seconds;
+    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
-    return `${minutes}:${seconds}`;
+    return `${paddedMinutes}:${paddedSeconds}`;
   });
 
   return {
