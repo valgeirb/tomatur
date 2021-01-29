@@ -8,9 +8,9 @@ const localStorage = {
 };
 
 let state = reactive({
-  session: 25,
-  shortBreak: 5,
-  longBreak: 15,
+  sessionMinutes: 25,
+  shortBreakMinutes: 5,
+  longBreakMinutes: 15,
   notifications: false,
   sound: false,
   darkTheme: false,

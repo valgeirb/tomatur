@@ -4,17 +4,16 @@
       <div class="flex justify-between py-6">
         <div>Session</div>
         <select
-          v-model="session"
+          v-model="sessionMinutes"
           class="text-tomato bg-white"
-          name="session"
-          id="session"
+          name="sessionMinutes"
         >
           <option
-            v-for="sessionTime in sessionOptions"
-            :key="sessionTime"
-            :value="sessionTime"
+            v-for="sessionMinutes in sessionMinutesOptions"
+            :key="sessionMinutes"
+            :value="sessionMinutes"
           >
-            {{ sessionTime }} minutes
+            {{ sessionMinutes }} minutes
           </option>
         </select>
       </div>
@@ -22,17 +21,16 @@
       <div class="flex justify-between py-6">
         <div>Small break</div>
         <select
-          v-model="shortBreak"
+          v-model="shortBreakMinutes"
           class="text-tomato bg-white"
-          name="session"
-          id="session"
+          name="shortBreakMinutes"
         >
           <option
-            v-for="shortBreakTime in shortBreakOptions"
-            :key="shortBreakTime"
-            :value="shortBreakTime"
+            v-for="shortBreakMinutes in shortBreakMinutesOptions"
+            :key="shortBreakMinutes"
+            :value="shortBreakMinutes"
           >
-            {{ shortBreakTime }} minutes
+            {{ shortBreakMinutes }} minutes
           </option>
         </select>
       </div>
@@ -40,17 +38,16 @@
       <div class="flex justify-between py-6">
         <div>Long break</div>
         <select
-          v-model="longBreak"
+          v-model="longBreakMinutes"
           class="text-tomato bg-white"
-          name="session"
-          id="session"
+          name="longBreakMinutes"
         >
           <option
-            v-for="longBreakTime in longBreakOptions"
-            :key="longBreakTime"
-            :value="longBreakTime"
+            v-for="longBreakMinutes in longBreakMinutesOptions"
+            :key="longBreakMinutes"
+            :value="longBreakMinutes"
           >
-            {{ longBreakTime }} minutes
+            {{ longBreakMinutes }} minutes
           </option>
         </select>
       </div>
@@ -83,16 +80,16 @@
   import { Toggle } from "../components";
 
   const {
-    session,
-    shortBreak,
-    longBreak,
+    sessionMinutes,
+    shortBreakMinutes,
+    longBreakMinutes,
     notifications,
     sound,
     darkTheme,
     showInfoButton,
   } = useSettings();
 
-  const sessionOptions = [25, 30, 35, 40, 50, 60, 70, 80, 90];
-  const shortBreakOptions = [5, 10, 15];
-  const longBreakOptions = [15, 20, 30];
+  const sessionMinutesOptions = [25, 30, 35, 40, 50, 60, 70, 80, 90];
+  const shortBreakMinutesOptions = [5, 10, 15];
+  const longBreakMinutesOptions = [15, 20, 30];
 </script>
