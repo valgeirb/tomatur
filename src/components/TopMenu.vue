@@ -1,18 +1,25 @@
 <template>
-  <div class="absolute w-full top-0 left-0 flex flex-row">
+  <div class="relative w-full flex flex-row items-center">
     <RouterLink
-      v-if="showBackIcon"
+      v-if="notOnPomodoroPage"
       to="/"
-      class="absolute left-0 h-16 w-16 bg-black text-white flex items-center justify-center text-2xl"
+      class="absolute left-0 text-2xl"
     >
       <FontAwesomeIcon icon="chevron-left" />
     </RouterLink>
+    <div
+      v-if="notOnPomodoroPage"
+      class="mx-auto flex items-center text-4xl font-bold uppercase"
+    >
+      <span>{{ title }}</span>
+    </div>
+
     <RouterLink
       v-if="showInfoIcon"
       to="/about"
-      class="absolute right-0 h-16 w-16 bg-black text-white flex items-center justify-center text-2xl"
+      class="absolute top-0 right-0 rounded-xl h-16 w-16 bg-black text-white flex items-center justify-center text-2xl"
     >
-      <FontAwesomeIcon icon="info" />
+      <FontAwesomeIcon icon="question" />
     </RouterLink>
   </div>
 </template>
@@ -28,5 +35,7 @@
   const showInfoIcon = computed(
     () => route.name === "Pomodoro" && showInfoButton.value,
   );
-  const showBackIcon = computed(() => route.name !== "Pomodoro");
+  const notOnPomodoroPage = computed(() => route.name !== "Pomodoro");
+
+  const title = computed(() => route.name);
 </script>
