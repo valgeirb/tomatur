@@ -1,6 +1,6 @@
 <template>
   <div class="h-full flex flex-col space-y-4 text-lg pt-12">
-    <div class="flex flex-col pt-4">
+    <div class="flex flex-col divide-y-2 divide-gray-100">
       <div class="flex justify-between py-6">
         <div>Session</div>
         <select
@@ -9,16 +9,13 @@
           name="session"
           id="session"
         >
-          <option value="25">25 minutes</option>
-          <option value="30">30 minutes</option>
-          <option value="35">35 minutes</option>
-          <option value="40">40 minutes</option>
-          <option value="50">50 minutes</option>
-          <option value="60">60 minutes</option>
-          <option value="70">70 minutes</option>
-          <option value="80">80 minutes</option>
-          <option value="80">80 minutes</option>
-          <option value="90">90 minutes</option>
+          <option
+            v-for="sessionTime in sessionOptions"
+            :key="sessionTime"
+            :value="sessionTime"
+          >
+            {{ sessionTime }} minutes
+          </option>
         </select>
       </div>
 
@@ -30,9 +27,13 @@
           name="session"
           id="session"
         >
-          <option value="5">5 minutes</option>
-          <option value="10">10 minutes</option>
-          <option value="15">15 minutes</option>
+          <option
+            v-for="shortBreakTime in shortBreakOptions"
+            :key="shortBreakTime"
+            :value="shortBreakTime"
+          >
+            {{ shortBreakTime }} minutes
+          </option>
         </select>
       </div>
 
@@ -44,9 +45,13 @@
           name="session"
           id="session"
         >
-          <option value="15">15 minutes</option>
-          <option value="20">20 minutes</option>
-          <option value="30">30 minutes</option>
+          <option
+            v-for="longBreakTime in longBreakOptions"
+            :key="longBreakTime"
+            :value="longBreakTime"
+          >
+            {{ longBreakTime }} minutes
+          </option>
         </select>
       </div>
 
@@ -86,4 +91,8 @@
     darkTheme,
     showInfoButton,
   } = useSettings();
+
+  const sessionOptions = [25, 30, 35, 40, 50, 60, 70, 80, 90];
+  const shortBreakOptions = [5, 10, 15];
+  const longBreakOptions = [15, 20, 30];
 </script>
