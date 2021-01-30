@@ -2,9 +2,16 @@ import { reactive, computed, toRefs, watch } from "vue";
 import * as workerTimers from "worker-timers";
 import useSettings from "./useSettings";
 
+let inititialized = false;
+
+const localStorage = {
+  get: (key) => JSON.parse(window.localStorage.getItem(key)),
+  set: (key, data) => window.localStorage.setItem(key, JSON.stringify(data)),
+};
+
 const { sessionMinutes, shortBreakMinutes, longBreakMinutes } = useSettings();
 
-const state = reactive({
+let state = reactive({
   started: false,
   currentMode: "pomodoro",
   modes: {
@@ -80,6 +87,19 @@ export default function usePomodoro() {
 
     return `${paddedMinutes}:${paddedSeconds}`;
   });
+
+  if (!inititialized) {
+    const savedTimer = JSON.parse(localStorage.get("timer"));
+    state = savedTimer ? reactive(savedTimer) : state;
+    if (state.started) {
+      start();
+    }
+    watch(state, () => localStorage.set("timer", JSON.stringify(state)), {
+      deep: true,
+    });
+
+    inititialized = true;
+  }
 
   return {
     ...toRefs(state),

@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <BottomMenu @start="start" @stop="stop" />
+    <BottomMenu @start="start" @stop="stop" :started="started" />
   </div>
 </template>
 

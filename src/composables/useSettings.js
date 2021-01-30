@@ -18,18 +18,6 @@ let state = reactive({
 });
 
 export default function useSettings() {
-  if (!inititialized) {
-    state.darkTheme = localStorage.get("theme") === "dark";
-
-    const savedSettings = JSON.parse(localStorage.get("settings"));
-    state = savedSettings ? reactive({ ...savedSettings }) : state;
-
-    watch(state, () => localStorage.set("settings", JSON.stringify(state)), {
-      deep: true,
-    });
-    inititialized = true;
-  }
-
   const toggleTheme = () => {
     if (localStorage.get("theme") === "light") {
       localStorage.set("theme", "dark");
@@ -41,6 +29,18 @@ export default function useSettings() {
       document.querySelector("html").classList.remove("dark");
     }
   };
+
+  if (!inititialized) {
+    state.darkTheme = localStorage.get("theme") === "dark";
+
+    const savedSettings = JSON.parse(localStorage.get("settings"));
+    state = savedSettings ? reactive(savedSettings) : state;
+
+    watch(state, () => localStorage.set("settings", JSON.stringify(state)), {
+      deep: true,
+    });
+    inititialized = true;
+  }
 
   return { ...toRefs(state), toggleTheme };
 }

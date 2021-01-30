@@ -26,17 +26,19 @@
 </template>
 
 <script setup>
-  import { useContext, ref, computed } from "vue";
+  import { defineProps, useContext, computed } from "vue";
+
+  const props = defineProps({
+    started: Boolean,
+  });
   const { emit } = useContext();
-  const timerStarted = ref(false);
-  const mainIcon = computed(() => (timerStarted.value ? "stop" : "play"));
+  const mainIcon = computed(() => (props.started ? "stop" : "play"));
 
   const startOrStop = () => {
-    if (timerStarted.value) {
+    if (props.started) {
       emit("stop");
     } else {
       emit("start");
     }
-    timerStarted.value = !timerStarted.value;
   };
 </script>
