@@ -57,7 +57,7 @@ export default function usePomodoro() {
     workerTimers.clearInterval(intervalId);
     state.pomodoros = 0;
     state.mode = "pomodoro";
-    state.remainingSeconds = sessionTime.value * 60;
+    state.remainingSeconds = sessionMinutes.value * 60;
   };
 
   const switchMode = (mode) => {

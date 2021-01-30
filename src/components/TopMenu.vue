@@ -17,7 +17,7 @@
     <RouterLink
       v-if="showInfoIcon"
       to="/about"
-      class="absolute top-0 right-0 rounded-xl h-16 w-16 bg-black text-white flex items-center justify-center text-2xl"
+      class="absolute top-0 right-0 rounded-xl h-16 w-16 text-black dark:text-gray-300 flex items-center justify-center text-2xl"
     >
       <FontAwesomeIcon icon="question" />
     </RouterLink>

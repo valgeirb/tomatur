@@ -19,6 +19,7 @@
 
 <style scoped>
   .toggle {
+    @apply dark:border-gray-300;
     width: 40px;
     height: 24px;
     border-radius: 12px;
@@ -36,6 +37,7 @@
     border-radius: 50%;
     display: block;
     background: #000000;
+    @apply dark:bg-gray-300;
     transition: background-color 0.15s, transform 0.15s;
   }
 

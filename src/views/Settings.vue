@@ -1,11 +1,11 @@
 <template>
   <div class="h-full flex flex-col space-y-4 text-lg pt-12">
-    <div class="flex flex-col divide-y-2 divide-gray-100">
+    <div class="flex flex-col divide-y-2 divide-gray-100 dark:divide-gray-800">
       <div class="flex justify-between py-6">
         <div>Session</div>
         <select
           v-model="sessionMinutes"
-          class="text-tomato bg-white"
+          class="text-tomato bg-white dark:bg-gray-900"
           name="sessionMinutes"
         >
           <option
@@ -22,7 +22,7 @@
         <div>Small break</div>
         <select
           v-model="shortBreakMinutes"
-          class="text-tomato bg-white"
+          class="text-tomato bg-white dark:bg-gray-900"
           name="shortBreakMinutes"
         >
           <option
@@ -39,7 +39,7 @@
         <div>Long break</div>
         <select
           v-model="longBreakMinutes"
-          class="text-tomato bg-white"
+          class="text-tomato bg-white dark:bg-gray-900"
           name="longBreakMinutes"
         >
           <option
@@ -64,11 +64,11 @@
 
       <div class="flex justify-between py-6">
         <div>Dark theme</div>
-        <Toggle v-model="darkTheme" />
+        <Toggle v-model="darkTheme" @update:modelValue="toggleTheme" />
       </div>
 
       <div class="flex justify-between py-6">
-        <div>Info button</div>
+        <div>Question mark</div>
         <Toggle v-model="showInfoButton" />
       </div>
     </div>
@@ -87,6 +87,7 @@
     sound,
     darkTheme,
     showInfoButton,
+    toggleTheme,
   } = useSettings();
 
   const sessionMinutesOptions = [25, 30, 35, 40, 50, 60, 70, 80, 90];

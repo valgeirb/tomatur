@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="grid grid-cols-3 justify-center justify-items-center items-center"
-  >
+  <div class="flex justify-between items-center">
     <RouterLink
       to="/settings"
       class="h-16 w-16 flex items-center justify-center cursor-pointer text-2xl"
