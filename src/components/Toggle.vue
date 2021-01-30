@@ -19,33 +19,17 @@
 
 <style scoped>
   .toggle {
-    @apply dark:border-gray-300;
-    width: 40px;
-    height: 24px;
-    border-radius: 12px;
-    box-sizing: border-box;
-    border: 2px solid #000000;
-    position: relative;
-    padding: 2px;
-    transition: border-color 0.15s;
-    cursor: pointer;
+    @apply w-10 h-6 rounded-full box-border border-2 border-black dark:border-gray-300 relative transition cursor-pointer p-0.5;
   }
   .toggle:before {
+    @apply w-4 h-4 rounded-full block bg-black dark:bg-gray-300 transition;
     content: "";
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: block;
-    background: #000000;
-    @apply dark:bg-gray-300;
-    transition: background-color 0.15s, transform 0.15s;
   }
 
   .toggle.on {
-    border-color: #ff6347;
+    @apply border-tomato;
   }
   .toggle.on:before {
-    background: #ff6347;
-    transform: translateX(16px);
+    @apply bg-tomato transform translate-x-4;
   }
 </style>
