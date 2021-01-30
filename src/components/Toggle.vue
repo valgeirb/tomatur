@@ -19,10 +19,10 @@
 
 <style scoped>
   .toggle {
-    @apply w-10 h-6 rounded-full box-border border-2 border-black dark:border-gray-300 relative transition cursor-pointer p-0.5;
+    @apply w-10 h-6 rounded-full box-border border-2 border-gray-300 relative transition cursor-pointer p-0.5;
   }
   .toggle:before {
-    @apply w-4 h-4 rounded-full block bg-black dark:bg-gray-300 transition;
+    @apply w-4 h-4 rounded-full block bg-gray-300 transition;
     content: "";
   }
 

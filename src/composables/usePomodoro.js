@@ -5,6 +5,7 @@ import useSettings from "./useSettings";
 const { sessionMinutes, shortBreakMinutes, longBreakMinutes } = useSettings();
 
 const state = reactive({
+  started: false,
   currentMode: "pomodoro",
   modes: {
     pomodoro: sessionMinutes.value,
@@ -12,6 +13,7 @@ const state = reactive({
     longBreak: longBreakMinutes.value,
   },
   pomodoros: 0,
+  initialRemainingSeconds: sessionMinutes.value * 60,
   remainingSeconds: sessionMinutes.value * 60,
 });
 
@@ -29,6 +31,7 @@ export default function usePomodoro() {
   let intervalId = null;
 
   const start = () => {
+    state.started = true;
     intervalId = workerTimers.setInterval(() => {
       state.remainingSeconds--;
       if (state.remainingSeconds === 0) {
@@ -54,15 +57,18 @@ export default function usePomodoro() {
   };
 
   const stop = () => {
+    state.started = false;
     workerTimers.clearInterval(intervalId);
     state.pomodoros = 0;
     state.mode = "pomodoro";
     state.remainingSeconds = sessionMinutes.value * 60;
+    state.initialRemainingSeconds = sessionMinutes.value * 60;
   };
 
   const switchMode = (mode) => {
     state.currentMode = mode;
     state.remainingSeconds = state.modes[mode] * 60;
+    state.initialRemainingSeconds = state.modes[mode] * 60;
   };
 
   const clock = computed(() => {
