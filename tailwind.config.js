@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       colors: {
         tomato: "#ff6347",
-        gray: colors.warmGray,
+        gray: colors.trueGray,
       },
     },
   },
