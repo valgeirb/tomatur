@@ -1,7 +1,8 @@
 <template>
   <div
-    class="h-full flex flex-col space-y-4 justify-around text-center pt-12 text-lg"
+    class="h-full flex flex-col space-y-4 justify-around text-center text-lg"
   >
+    <Header title="About" />
     <div>
       <div class="text-4xl font-bold uppercase">What?</div>
       <div>
@@ -48,7 +49,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+  import { Header } from "../components";
+</script>
 
 <style scoped>
   .testing {

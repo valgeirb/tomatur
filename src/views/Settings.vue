@@ -1,5 +1,6 @@
 <template>
-  <div class="h-full flex flex-col space-y-4 text-lg pt-12">
+  <div class="h-full flex flex-col space-y-4 text-lg">
+    <Header title="Settings" />
     <div class="flex flex-col divide-y-2 divide-gray-100 dark:divide-gray-800">
       <div class="flex justify-between py-6">
         <div>Session</div>
@@ -77,7 +78,7 @@
 
 <script setup>
   import useSettings from "../composables/useSettings";
-  import { Toggle } from "../components";
+  import { Toggle, Header } from "../components";
 
   const {
     sessionMinutes,
