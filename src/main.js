@@ -4,7 +4,6 @@ import {
   faQuestion,
   faPlay,
   faStop,
-  faListUl,
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -13,7 +12,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import "./index.css";
 
-library.add(faSlidersH, faQuestion, faPlay, faStop, faListUl, faChevronLeft);
+library.add(faSlidersH, faQuestion, faPlay, faStop, faChevronLeft);
+
 const app = createApp(App);
 app.component("FontAwesomeIcon", FontAwesomeIcon);
 app.use(router);

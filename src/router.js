@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { Pomodoro, Settings, About, Sessions } from "./views";
+import { Pomodoro, Settings, About } from "./views";
 
 const routes = [
   {
@@ -12,11 +12,9 @@ const routes = [
         component: Settings,
         name: "Settings",
       },
+      { path: "/about", component: About, name: "About" },
     ],
   },
-  { path: "/about", component: About, name: "About" },
-
-  { path: "/sessions", component: Sessions, name: "Sessions" },
 ];
 
 const router = createRouter({
