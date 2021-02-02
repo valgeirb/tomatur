@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply h-full;
+  @apply h-full bg-white dark:bg-gray-900;
 }
 * {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
