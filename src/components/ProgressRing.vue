@@ -1,7 +1,11 @@
 <template>
-  <svg :height="radius * 2" :width="radius * 2">
+  <svg
+    :height="radius * 2"
+    :width="radius * 2"
+    class="text-gray-100 dark:text-gray-700"
+  >
     <circle
-      stroke="white"
+      stroke="currentColor"
       :stroke-dasharray="circumference + ' ' + circumference"
       :stroke-width="stroke"
       fill="transparent"
