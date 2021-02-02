@@ -1,18 +1,13 @@
 <template>
-  <div
-    class="h-full flex flex-col space-y-4 justify-around text-center text-lg"
-  >
+  <div class="h-full flex flex-col space-y-8 text-lg">
     <Header title="About" />
     <div>
-      <div class="text-4xl font-bold uppercase">What?</div>
-      <div>
-        The Pomodoro Technique is a
-        <span class="font-bold text-tomato">time management</span> method
-        developed by Francesco Cirillo in the late 1980s.
-      </div>
+      The Pomodoro Technique is a
+      <span class="font-bold text-tomato">time management</span> method
+      developed by Francesco Cirillo in the late 1980s.
     </div>
 
-    <div>
+    <div class="text-center">
       <div class="text-4xl font-bold uppercase">How?</div>
       <div class="testing">
         <span class="text-left text-tomato text-4xl font-bold">1</span>
@@ -34,17 +29,14 @@
       </div>
     </div>
 
-    <div>
-      <div class="text-4xl font-bold uppercase">Who?</div>
-      <div>
-        <div>Made by</div>
-        <a
-          href="https://valgeir.dev/"
-          target="_blank"
-          class="font-bold text-tomato underline"
-          >Valgeir Björnsson</a
-        >
-      </div>
+    <div class="text-center border-t-2 border-gray-100 dark:border-gray-800">
+      <div class="mt-4">Made by</div>
+      <a
+        href="https://valgeir.dev/"
+        target="_blank"
+        class="font-bold text-tomato underline"
+        >@valgeir</a
+      >
     </div>
   </div>
 </template>
