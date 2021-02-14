@@ -65,7 +65,7 @@
 
       <div class="flex justify-between py-6">
         <div>Dark theme</div>
-        <Toggle v-model="darkTheme" @update:modelValue="toggleTheme" />
+        <Toggle v-model="darkTheme" @update:modelValue="toggleDark" />
       </div>
 
       <div class="flex justify-between py-6">
@@ -88,7 +88,7 @@
     sound,
     darkTheme,
     showInfoButton,
-    toggleTheme,
+    toggleDark,
   } = useSettings();
 
   const sessionMinutesOptions = [25, 30, 35, 40, 50, 60, 70, 80, 90];
