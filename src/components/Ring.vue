@@ -31,14 +31,14 @@
 
   const props = defineProps({
     radius: Number,
-    progress: Number,
+    percentage: Number,
     stroke: Number,
   });
 
   const normalizedRadius = ref(props.radius - props.stroke * 2);
   const circumference = ref(normalizedRadius.value * 2 * Math.PI);
   const strokeDashoffset = computed(
-    () => circumference.value - (props.progress / 100) * circumference.value,
+    () => circumference.value - (props.percentage / 100) * circumference.value,
   );
 </script>
 
