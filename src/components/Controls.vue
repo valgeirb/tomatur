@@ -1,10 +1,11 @@
 <template>
   <div class="relative flex justify-center items-center">
     <RouterLink
+      v-if="!started"
       to="/settings"
       class="left-0 absolute h-16 w-16 flex items-center justify-center cursor-pointer text-2xl"
     >
-      <FontAwesomeIcon icon="sliders-h" />
+      <FontAwesomeIcon icon="bars" />
     </RouterLink>
     <div
       @click="startOrStop"
@@ -17,11 +18,11 @@
       />
     </div>
     <RouterLink
-      v-if="showInfoButton"
+      v-if="showInfoButton && !started"
       to="/about"
       class="absolute right-0 rounded-xl h-16 w-16 text-black dark:text-gray-300 flex items-center justify-center text-2xl"
     >
-      <FontAwesomeIcon icon="question" />
+      <FontAwesomeIcon :icon="['far', 'question-circle']" />
     </RouterLink>
   </div>
 </template>
