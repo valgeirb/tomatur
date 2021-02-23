@@ -20,7 +20,7 @@
     <RouterLink
       v-if="showInfoButton && !started"
       to="/about"
-      class="absolute right-0 rounded-xl h-16 w-16 text-black dark:text-gray-300 flex items-center justify-center text-2xl"
+      class="absolute right-0 rounded-xl h-16 w-16 dark:text-gray-300 flex items-center justify-center text-2xl"
     >
       <FontAwesomeIcon :icon="['far', 'question-circle']" />
     </RouterLink>

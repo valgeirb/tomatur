@@ -1,19 +1,21 @@
 import { reactive, computed, toRefs, watch } from "vue";
 import * as workerTimers from "worker-timers";
 import useSettings from "./useSettings";
+import useSound from "./useSound";
+import bell from "../assets/bell.wav";
 
-let inititialized = false;
-
-const localStorage = {
-  get: (key) => JSON.parse(window.localStorage.getItem(key)),
-  set: (key, data) => window.localStorage.setItem(key, JSON.stringify(data)),
-};
-
-const { sessionMinutes, shortBreakMinutes, longBreakMinutes } = useSettings();
+const {
+  sessionMinutes,
+  shortBreakMinutes,
+  longBreakMinutes,
+  sound,
+} = useSettings();
+const { play } = useSound(bell);
 
 let state = reactive({
   started: false,
-  currentMode: "pomodoro",
+  paused: false,
+  mode: "pomodoro",
   modes: {
     pomodoro: sessionMinutes.value,
     shortBreak: shortBreakMinutes.value,
@@ -24,28 +26,34 @@ let state = reactive({
   remainingSeconds: sessionMinutes.value * 60,
 });
 
-watch(
-  [sessionMinutes, shortBreakMinutes, longBreakMinutes],
-  ([sessionMinutes, shortBreakMinutes, longBreakMinutes]) => {
-    state.modes.pomodoro = sessionMinutes;
-    state.modes.shortBreak = shortBreakMinutes;
-    state.modes.longBreak = longBreakMinutes;
-    state.remainingSeconds = sessionMinutes * 60;
-  },
-);
+watch([sessionMinutes, shortBreakMinutes, longBreakMinutes], (newValues) => {
+  updateState(...newValues);
+});
+
+const updateState = (sessionMinutes, shortBreakMinutes, longBreakMinutes) => {
+  state.modes.pomodoro = sessionMinutes;
+  state.modes.shortBreak = shortBreakMinutes;
+  state.modes.longBreak = longBreakMinutes;
+  state.initialRemainingSeconds = sessionMinutes * 60;
+  state.remainingSeconds = sessionMinutes * 60;
+};
 
 export default function usePomodoro() {
   let intervalId = null;
 
   const start = () => {
+    state.paused = false;
     state.started = true;
     intervalId = workerTimers.setInterval(() => {
       state.remainingSeconds--;
       if (state.remainingSeconds === 0) {
         workerTimers.clearInterval(intervalId);
-
+        intervalId = null;
+        if (sound.value) {
+          play();
+        }
         // Continuously switches between pomodoro mode and break mode (short/long)
-        switch (state.currentMode) {
+        switch (state.mode) {
           case "pomodoro":
             state.pomodoros++;
             if (state.pomodoros === 4) {
@@ -58,22 +66,24 @@ export default function usePomodoro() {
           default:
             switchMode("pomodoro");
         }
-        start();
+        state.paused = true;
       }
     }, 1000);
   };
 
   const stop = () => {
+    console.log("wat");
     state.started = false;
-    workerTimers.clearInterval(intervalId);
+    state.paused = false;
+    if (intervalId) {
+      workerTimers.clearInterval(intervalId);
+    }
     state.pomodoros = 0;
-    state.mode = "pomodoro";
-    state.remainingSeconds = sessionMinutes.value * 60;
-    state.initialRemainingSeconds = sessionMinutes.value * 60;
+    switchMode("pomodoro");
   };
 
   const switchMode = (mode) => {
-    state.currentMode = mode;
+    state.mode = mode;
     state.remainingSeconds = state.modes[mode] * 60;
     state.initialRemainingSeconds = state.modes[mode] * 60;
   };
@@ -88,23 +98,15 @@ export default function usePomodoro() {
     return `${paddedMinutes}:${paddedSeconds}`;
   });
 
-  if (!inititialized) {
-    const savedTimer = JSON.parse(localStorage.get("timer"));
-    state = savedTimer ? reactive(savedTimer) : state;
-    if (state.started) {
-      start();
-    }
-    watch(state, () => localStorage.set("timer", JSON.stringify(state)), {
-      deep: true,
-    });
-
-    inititialized = true;
-  }
+  const percentage = computed(
+    () => (state.remainingSeconds / state.initialRemainingSeconds) * 100,
+  );
 
   return {
     ...toRefs(state),
     start,
     stop,
     clock,
+    percentage,
   };
 }

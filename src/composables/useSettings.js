@@ -1,6 +1,7 @@
 import { reactive, watch, toRefs } from "vue";
+import useTheme from "./useTheme";
 
-let inititialized = false;
+let initialized = false;
 
 const localStorage = {
   get: (key) => window.localStorage.getItem(key),
@@ -8,9 +9,9 @@ const localStorage = {
 };
 
 let state = reactive({
-  sessionMinutes: 25,
-  shortBreakMinutes: 5,
-  longBreakMinutes: 15,
+  sessionMinutes: 0.1,
+  shortBreakMinutes: 0.1,
+  longBreakMinutes: 0.1,
   notifications: false,
   sound: false,
   darkTheme: false,
@@ -18,20 +19,16 @@ let state = reactive({
 });
 
 export default function useSettings() {
-  const toggleTheme = () => {
-    if (localStorage.get("theme") === "light") {
-      localStorage.set("theme", "dark");
-      state.darkTheme = true;
-      document.querySelector("html").classList.add("dark");
-    } else {
-      localStorage.set("theme", "light");
-      state.darkTheme = false;
-      document.querySelector("html").classList.remove("dark");
-    }
+  const toggleDark = () => {
+    const { currentTheme, toggleTheme } = useTheme();
+    toggleTheme();
+    state.darkTheme = currentTheme.value === "dark";
   };
 
-  if (!inititialized) {
-    state.darkTheme = localStorage.get("theme") === "dark";
+  if (!initialized) {
+    const { currentTheme } = useTheme();
+
+    state.darkTheme = currentTheme.value === "dark";
 
     const savedSettings = JSON.parse(localStorage.get("settings"));
     state = savedSettings ? reactive(savedSettings) : state;
@@ -39,8 +36,9 @@ export default function useSettings() {
     watch(state, () => localStorage.set("settings", JSON.stringify(state)), {
       deep: true,
     });
-    inititialized = true;
+
+    initialized = true;
   }
 
-  return { ...toRefs(state), toggleTheme };
+  return { ...toRefs(state), toggleDark };
 }

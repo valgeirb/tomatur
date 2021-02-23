@@ -2,7 +2,7 @@
   <svg
     :height="radius * 2"
     :width="radius * 2"
-    class="text-gray-100 dark:text-gray-700"
+    class="text-red-100 dark:text-gray-700"
   >
     <circle
       stroke="currentColor"
