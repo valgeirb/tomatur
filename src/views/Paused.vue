@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-  import Tomato from "./Tomato.vue";
+  import { Tomato } from "../components";
   import { useContext, defineProps, computed, ref } from "vue";
 
   const props = defineProps({

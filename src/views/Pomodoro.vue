@@ -52,7 +52,8 @@
 
 <script setup>
   import { computed } from "vue";
-  import { Ring, Controls, Paused } from "../components";
+  import { Ring, Controls } from "../components";
+  import Paused from "./Paused.vue";
   import { usePomodoro, useSettings } from "../composables";
 
   const { showInfoButton } = useSettings();
